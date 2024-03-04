@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Management Tool</title>
+  <script src="https://static-bundles.visme.co/forms/vismeforms-embed.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 blue-section">
+        <img id="img" src="../../assets/background-img.png" alt="Image">
+      </div>
+      <div class="col-md-6 red-section">
+        <div class="main">
+          <h1><img src="../../assets/hired.png" alt="Img">Employee Management Hub</h1>
+        </div>
+      
+        <div class="login-container">
+          <h2><img src="../../assets/Emp-FevIcon.jpg" alt="Img" style="height: 50px; width: 50px; border-radius: 50%;" >&nbsp;&nbsp;Login </h2><br>
+          <div class="form-group">
+            <label for="username">Username :</label>
+            <input type="text" id="username" [(ngModel)]="username" placeholder="Enter Username">
+          </div>
+          <div class="form-group">
+            <label for="password">Password :</label>
+            <input type="password" id="password" [(ngModel)]="password" placeholder="Enter Password">
+          </div>
+          <div class="form-group" style="text-align: center;">
+            <button class="btn btn-danger" (click)="clearFields()">Clear</button>
+            <button class="btn btn-success" (click)="login()">Login</button>
+          </div>
+          <div *ngIf="loginFailed" class="error-message">
+            invalid username or password.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="visme_d" data-title="Custom Login Form" data-url="pvmweex4-custom-login-form" data-domain="forms" data-full-page="false" data-min-height="500px" data-form-id="24970"></div><script src="https://static-bundles.visme.co/forms/vismeforms-embed.js"></script>
+</body>
+
+</html>
+
+
+
+
+<!-- <div class="main">
+  <h1><img src="../../assets/Emp-FevIcon.jpg" alt="">Employee Management Tool</h1>
+</div>
+
+
+<div class="login-container">
+  <h2>Login Page</h2><br>
+  <div class="form-group">
+    <label for="username">Username :</label>
+    <input type="text" id="username" [(ngModel)]="username" placeholder="Enter Username">
+  </div>
+  <div class="form-group">
+    <label for="password">Password :</label>
+    <input type="password" id="password" [(ngModel)]="password" placeholder="Enter Password">
+  </div>
+  <div class="form-group" style="text-align: right;">
+    <button class="btn btn-primary" (click)="clearFields()">Clear</button>
+    <button class="btn btn-success" (click)="login()">Login</button>
+  </div>
+  <div *ngIf="loginFailed" class="error-message">
+    invalid username or password.
+  </div>
+</div> -->

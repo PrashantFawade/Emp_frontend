@@ -1,0 +1,712 @@
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<div class="topnav">
+    <a>
+        <h4>
+            <!-- <i class="fas fa-th"></i> -->
+            <img src="../../assets/hired.png" alt="AppLogo" id="AppLogo">
+            <!-- <img src="../../assets/online-interview.png" alt="AppLogo" id="AppLogo"> -->
+            &nbsp;&nbsp;Employee Management Hub
+        </h4>
+    </a>
+    <!-- <a id="links" (click)="openModal('Add-Employee')">Add Employee</a>
+    <a id="links" (click)="openModal('Add-Department')">Add Department</a>
+    <a id="links" (click)="openModal('Assign-Department')">Assign Department</a>
+    <a id="links" (click)="openModal('View-Employee')">View Employees</a>
+    <a id="links" (click)="openModal('View-Department')">View Departments</a> -->
+
+
+    <a class="split">
+        <!-- <i class="fas fa-user" title="Profile"></i> -->
+        <img src="../../assets/Emp-FevIcon.jpg" alt="Profile"
+            onclick="document.getElementById('id01').style.display='block'">
+    </a>
+    <a class="split"  routerLink="/App-walkthrough">About</a>
+    <a class="split" (click)="openNotificationModal()">Notifications <span
+            class="notification-badge">{{notifications.length}}</span></a>
+    <a class="split" (click)="openModal('View-Department')">Departments</a>
+    <a class="split" (click)="openModal('View-Employee')">Employees</a>
+</div>
+
+<!-- Notification Modal -->
+<div id="notificationModal" class="Notifymodal">
+    <div class="Notifymodal-content">
+        <span class="closeNotifi" (click)="closeNotificationModal()">&times;</span>
+        <h3><img id="notiImg1" src="../../assets/action.png"
+                alt="notification">&nbsp;&nbsp;<b>({{notifications.length}})&nbsp; Pending Notifications</b></h3>
+        <div class="notifications">
+            <div *ngFor="let notification of notifications; let i = index">
+                <img id="notiImg" src="../../assets/trace.png" alt="notification"> &nbsp;{{notification}}&nbsp;&nbsp;
+                <!-- <i class="fas fa-trash" title="Delete" id="delete" (click)="deleteNotification(i)"></i> -->
+                <img src="../../assets/trash-bin.png" alt="delete notification" title="Delete" id="delete"
+                    (click)="deleteNotification(i)">
+            </div>
+            <!-- <button class="btn btn-sm" (click)="closeNotificationModal()">Close</button> -->
+        </div>
+    </div>
+</div>
+
+<body>
+    <div class="sidebar">
+        <!-- <h4> &nbsp;Menu</h4> -->
+        <button class="btn"><i class="fa fa-bars"></i> Menu</button>
+        <a class="menubtn" (click)="openModal('Add-Employee')">Add Employee</a>
+        <a class="menubtn" (click)="openModal('Add-Department')">Add Department</a>
+        <a class="menubtn" (click)="openModal('Assign-Department')">Assign Department</a>
+        <a class="menubtn" (click)="openModal('View-Employee')">View Employees</a>
+        <a class="menubtn" (click)="openModal('View-Department')">View Departments</a>
+        <a class="menubtn" (click)="openModal('View-AssignedDepartment')">Assigned Department</a>
+        <div>
+            &nbsp; <i class="fa fa-bars"></i>&nbsp;<b>Other Options</b>
+        <a class="menubtn" routerLink="/App-walkthrough">App Walkthrough</a>
+        </div>
+    </div>
+
+    <!-- <div class="loader" *ngIf="isLoading"></div> -->
+    <div class="Waiter" *ngIf="isLoading">
+        <p>Loading Details ....</p>
+        <div class="spinner"></div>
+    </div>
+
+    <div class="content" *ngIf="!isLoading">
+        <h1> 
+            <img  class="Bt" id="img" src="../../assets/online-interview.png" alt="take action">
+            <span class="Bt">Employee Management Hub</span>
+            <span class="Bt" routerLink="/App-walkthrough">Application Walkthrough</span>
+            <span class="Bt" routerLink="/statistics">Statistics Dashboard</span>
+            <span class="Bt">Employee Status</span>
+            <span class="Bt">Records</span>
+             <br>
+            <marquee direction="right">
+                <p>Manage your employees efficiently and effectively.</p>
+            </marquee>
+        </h1>
+
+        <span class="gradient-text">
+            Efficient Employee Management >> Manage your employees with <br> 
+            ease using our intuitive and user-friendly interface. Track employee <br>
+            performance, attendance and more with just a few clicks.
+        </span>
+        
+        <h1 class="h1"><img id="img" src="../../assets/trace.png" alt="take action">&nbsp;&nbsp;Take Actions Below</h1>
+        <div class="button-container">
+            <button class="button" (click)="openModal('Add-Employee')"><img src="../../assets/group.png"><span>Add
+                    Employee</span></button>
+            <button class="button" (click)="openModal('Add-Department')"><img
+                    src="../../assets/department.png"><span>Add Department</span></button>
+            <button class="button" (click)="openModal('Assign-Department')"><img
+                    src="../../assets/networking.png"><span>Assign Department</span></button>
+        </div>
+        <br>
+        <h1 class="h1"><img id="img" src="../../assets/trace.png" alt="find details">&nbsp;&nbsp;Find Details Below</h1>
+
+        <div class="button-container">
+            <button class="button" (click)="openModal('View-Employee')"><img src="../../assets/research.png"><span>View
+                    Employees</span></button>
+            <button class="button" (click)="openModal('View-Department')"><img src="../../assets/action.png"><span>View
+                    Departments</span></button>
+            <button class="button" (click)="openModal('View-AssignedDepartment')"><img
+                    src="../../assets/modification.png"><span>Assigned Department</span></button>
+        </div>
+    </div>
+
+    <!-- The Add Employee Modal -->
+    <div id="Add-Employee" class="modal">
+        <div class="modal-content">
+            <div class="modalHeading">
+                <button class="btn" (click)="closeModal('Add-Employee')"><i class="fa fa-arrow-left"></i></button>
+                <h3 class="heading">Add Employee</h3>
+                <span class="closeModal" (click)="closeModal('Add-Employee')">&times;</span>
+            </div>
+
+            <form [formGroup]="AddemployeeForm" (ngSubmit)="onSubmitAddemployeeForm()">
+                <div class="addemp">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Employee Name <span id="star">*</span></label>
+                            <input type="text" name="name" id="name" formControlName="name" required
+                                class="form-control" placeholder="Enter Employee Name">
+                            <!-- <div class="alert alert-danger" *ngIf="!AddemployeeForm.get('name')!.valid && (AddemployeeForm.get('name')!.dirty || AddemployeeForm.get('name')!.touched)">
+                                <div *ngIf="AddemployeeForm.get('name')!.errors.required">Name is required</div>
+                                <div *ngIf="AddemployeeForm.get('name')!.errors.pattern">Name cannot contain numbers</div>
+                            </div> -->
+                            <span class="text-danger"
+                                *ngIf="!AddemployeeForm.get('name')!.valid && (AddemployeeForm.get('name')!.dirty || AddemployeeForm.get('name')!.touched)"><span
+                                    id="star">*</span>&nbsp;Name is required</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dob">Emplyee DOB <span id="star">*</span></label>
+                            <input type="date" name="dob" id="dob" formControlName="dob" required class="form-control">
+                            <span class="text-danger"
+                                *ngIf="!AddemployeeForm.get('dob')!.valid && (AddemployeeForm.get('dob')!.dirty || AddemployeeForm.get('dob')!.touched)"><span
+                                    id="star">*</span>&nbsp;Date of birth is required</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Address <span id="star">*</span></label>
+                            <textarea name="address" id="address" formControlName="address" cols="55" rows="2"
+                                placeholder="Enter Address" class="form-control"></textarea>
+                            <span class="text-danger"
+                                *ngIf="!AddemployeeForm.get('address')!.valid && (AddemployeeForm.get('address')!.dirty || AddemployeeForm.get('address')!.touched)"><span
+                                    id="star">*</span>&nbsp;Address is required</span>
+                        </div>
+
+                        <button class="btn btn-info" (click)="onClear()">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-warning" [disabled]="!AddemployeeForm.valid">
+                            Add Employee
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        </button> <br>
+
+                        <!-- <div *ngIf="successMsg" class="alert alert-success text-center"> -->
+                        <span *ngIf="successMsg" class="alert text-success text-center">{{successMsg}}</span>
+                        <!-- </div> -->
+                        <!-- <div *ngIf="errorMsg" class="alert alert-danger text-center"> -->
+                        <span *ngIf="errorMsg" class="alert alert-danger text-center">{{errorMsg}}</span>
+                        <!-- </div> -->
+                    </div> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="mobNumber">Mobile Number <span id="star">*</span></label>
+                            <input type="number" name="mobNumber" id="mobNumber" formControlName="mobNumber" required
+                                class="form-control" placeholder="Enter Mobile Number">
+                            <span class="text-danger"
+                                *ngIf="!AddemployeeForm.get('mobNumber')!.valid && (AddemployeeForm.get('mobNumber')!.dirty || AddemployeeForm.get('mobNumber')!.touched)"><span
+                                    id="star">*</span>&nbsp;Mobile Number is required</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email <span id="star">*</span></label>
+                            <input type="email" name="email" id="email" formControlName="email" required
+                                class="form-control" placeholder="Enter Email">
+                            <span class="text-danger"
+                                *ngIf="!AddemployeeForm.get('email')!.valid && (AddemployeeForm.get('email')!.dirty || AddemployeeForm.get('email')!.touched)"><span
+                                    id="star">*</span>&nbsp;Email is required</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pincode">Pincode <span id="star">*</span></label>
+                            <input type="number" name="pincode" id="pincode" formControlName="pincode" required
+                                class="form-control" placeholder="Enter Pincode">
+                            <span class="text-danger"
+                                *ngIf="!AddemployeeForm.get('pincode')!.valid && (AddemployeeForm.get('pincode')!.dirty || AddemployeeForm.get('pincode')!.touched)"><span
+                                    id="star">*</span>&nbsp;Pincode is required</span>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- <span *ngIf="successMsg" class="btn btn-success">Employee Added Successfully !!</span>
+                <span *ngIf="errorMsg" class="btn btn-danger">Employee Adding Failed !!</span> -->
+            </form>
+
+        </div>
+    </div>
+
+    <!-- The Add Department Modal -->
+    <div id="Add-Department" class="modal">
+        <div class="modal-content">
+            <div class="modalHeading">
+                <button class="btn" (click)="closeModal('Add-Department')"><i class="fa fa-arrow-left"></i></button>
+                <h3 class="heading">Add Department</h3>
+                <span class="closeModal" (click)="closeModal('Add-Department')">&times;</span>
+            </div>
+
+            <form [formGroup]="AddDepartmentForm" (ngSubmit)="onSubmitAddDepartmentForm()">
+                <div class="addemp">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="deptname">Department Name <span id="star">*</span></label>
+                            <input type="text" id="deptname" name="deptname" formControlName="deptname" required
+                                class="form-control" placeholder="Enter Department Name">
+                            <span class="text-danger"
+                                *ngIf="!AddDepartmentForm.get('deptname')!.valid && (AddDepartmentForm.get('deptname')!.dirty || AddDepartmentForm.get('deptname')!.touched)"><span
+                                    id="star">*</span>&nbsp;Department name is required</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="unit">Unit <span id="star">*</span></label>
+                            <input type="text" name="unit" id="unit" formControlName="unit" required
+                                class="form-control" placeholder="Enter Department Unit">
+                            <span class="text-danger"
+                                *ngIf="!AddDepartmentForm.get('unit')!.valid && (AddDepartmentForm.get('unit')!.dirty || AddDepartmentForm.get('unit')!.touched)"><span
+                                    id="star">*</span>&nbsp;Unit is required</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location <span id="star">*</span></label>
+                            <!-- <input type="text" id="location" formControlName="location" required class="form-control" placeholder="Enter Location"> -->
+                            <select name="location" id="location" formControlName="location" required
+                                class="form-control">
+                                <option selected="true" value="">-- Select Location --</option>
+                                <option value="Pune">Pune</option>
+                                <option value="Benglore">Benglore</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Hydrabad">Hydrabad</option>
+                            </select>
+                            <span class="text-danger"
+                                *ngIf="!AddDepartmentForm.get('location')!.valid && (AddDepartmentForm.get('location')!.dirty || AddDepartmentForm.get('location')!.touched)"><span
+                                    id="star">*</span>&nbsp;Location is required</span>
+                        </div>
+
+                        <button class="btn btn-info" (click)="onClear2()">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-warning" [disabled]="!AddDepartmentForm.valid">Add
+                            Department
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        </button> <br>
+
+                        <span *ngIf="successDept" class="alert text-success text-center">{{successDept}}</span>
+                        <span *ngIf="errorDept" class="alert alert-danger text-center">{{errorDept}}</span>
+
+                    </div> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="deptCode">Department Code <span id="star">*</span></label>
+                            <input type="number" name="deptCode" id="deptCode" formControlName="deptCode" required
+                                class="form-control" placeholder="Enter Department Code">
+                            <span class="text-danger"
+                                *ngIf="!AddDepartmentForm.get('deptCode')!.valid && (AddDepartmentForm.get('deptCode')!.dirty || AddDepartmentForm.get('deptCode')!.touched)"><span
+                                    id="star">*</span>&nbsp;Department code is required</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact">Contact</label>
+                            <input type="number" name="contact" id="contact" formControlName="contact" required
+                                class="form-control" placeholder="Enter Deaprtment Contact">
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    <!-- The Assign Department Modal -->
+    <div id="Assign-Department" class="modal">
+        <div class="modal-content">
+            <div class="modalHeading">
+                <button class="btn" (click)="closeModal('Assign-Department')"><i class="fa fa-arrow-left"></i></button>
+                <h3 class="heading">Assign Department to Employee</h3>
+                <span class="closeModal" (click)="closeModal('Assign-Department')">&times;</span>
+            </div>
+
+            <form [formGroup]="AssignDepartmentForm" (ngSubmit)="onSubmitAssignDepartmentForm()">
+                <div class="addemp">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="empName">Employee Name <span id="star">*</span></label>
+                            <!-- <input type="text" id="empname" name="empname" formControlName="empname" required class="form-control" placeholder="Enter Department Name"> -->
+                            <select name="empName" id="empName" formControlName="empName" required class="form-control">
+                                <option value="" selected="true" disabled>--Select Employee--</option>
+                                <option *ngFor="let employee of EmployeesData" value="{{employee.name}}">
+                                    {{employee.name}}</option>
+                            </select>
+
+                            <!-- <select name="empName" id="empName" formControlName="empName" required class="form-control">
+                                <option selected="true" value="">-- Select Employee --</option>
+                                <option value="PRASHANT">PRASHANT</option>
+                                <option value="SAI">SAI</option>
+                                <option value="DEEPAK">DEEPAK</option>
+                            </select> -->
+
+                            <span class="text-danger"
+                                *ngIf="!AssignDepartmentForm.get('empName')!.valid && (AssignDepartmentForm.get('empName')!.dirty || AssignDepartmentForm.get('empName')!.touched)"><span
+                                    id="star">*</span>&nbsp;Employee name is required</span>
+                        </div>
+
+                        <button class="btn btn-info" (click)="onClear3()">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-warning" [disabled]="!AssignDepartmentForm.valid">Assign
+                            Department
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        </button> <br>
+
+                        <span *ngIf="successAssig" class="alert text-success text-center">{{successAssig}}</span>
+                        <span *ngIf="errorAssig" class="alert alert-danger text-center">{{errorAssig}}</span>
+
+                    </div> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="detName">Department Name <span id="star">*</span></label>
+                            <!-- <input type="text" id="detName" name="detName" formControlName="detName" required class="form-control" placeholder="Enter Department Name"> -->
+
+                            <select name="detName" id="detName" formControlName="detName" required class="form-control">
+                                <option value="" selected="true" disabled>--Select Department--</option>
+                                <option *ngFor="let department of DepartmentData" value="{{department.deptname}}">
+                                    {{department.deptname}}</option>
+                            </select>
+
+                            <!-- <select name="detName" id="detName" formControlName="detName" required class="form-control">
+                                <option selected="true" value="">-- Select Department --</option>
+                                <option value="MFGADM">MFGADM</option>
+                                <option value="DXEMP">DXEMP</option>
+                                <option value="ORACLE">ORACLE</option>
+                            </select> -->
+                            <span class="text-danger"
+                                *ngIf="!AssignDepartmentForm.get('detName')!.valid && (AssignDepartmentForm.get('detName')!.dirty || AssignDepartmentForm.get('detName')!.touched)"><span
+                                    id="star">*</span>&nbsp;Department name is required</span>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- The View Employee Modal -->
+    <div id="View-Employee" class="modal">
+        <div class="modal-content">
+            <div class="modalHeading">
+                <button class="btn" (click)="closeModal('View-Employee')"><i class="fa fa-arrow-left"></i></button>
+                <h3 class="heading">Employee Details</h3>
+                <span class="closeModal" (click)="closeModal('View-Employee')">&times;</span>
+            </div>
+            <div class="addemp">
+
+                <div class="container mt-3">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>DOB</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Pincode</th>
+                                    <th>Take Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let employeedata of EmployeesData">
+                                    <td>{{employeedata.name}}</td>
+                                    <td>{{employeedata.dob}}</td>
+                                    <td>{{employeedata.mobNumber}}</td>
+                                    <td>{{employeedata.email}}</td>
+                                    <td>{{employeedata.address}}</td>
+                                    <td>{{employeedata.pincode}}</td>
+                                    <td>
+                                        <p>
+                                            <img id="editicon" (click)="editEmployee(employeedata)"
+                                                src="../../assets/edit.gif" alt="Edit" title="Edit">
+                                            <img id="deleteicon" (click)="deleteEmp(employeedata._id)"
+                                                src="../../assets/trash-bin.gif" alt="delete" title="delete">
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- view department modal -->
+    <div id="View-Department" class="modal">
+        <div class="modal-content">
+            <div class="modalHeading">
+                <button class="btn" (click)="closeModal('View-Department')"><i class="fa fa-arrow-left"></i></button>
+                <h3 class="heading">Department Details</h3>
+                <span class="closeModal" (click)="closeModal('View-Department')">&times;</span>
+            </div>
+            <div class="addemp">
+
+                <div class="container mt-3">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>Department Name</th>
+                                    <th>Department Unit</th>
+                                    <th>Department Code</th>
+                                    <th>Location</th>
+                                    <th>Contact</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let deptData of DepartmentData">
+                                <tr>
+                                    <td>{{deptData.deptname}}</td>
+                                    <td>{{deptData.unit}}</td>
+                                    <td>{{deptData.deptCode}}</td>
+                                    <td>{{deptData.location}}</td>
+                                    <td>{{deptData.contact}}</td>
+                                    <td>
+                                        <img id="editicon" (click)="editDepartment(deptData)"
+                                            src="../../assets/edit.gif" alt="Edit" title="Edit">&nbsp;
+                                        <img id="deleteicon" (click)="deleteDepartment(deptData._id)"
+                                            src="../../assets/trash-bin.gif" alt="delete" title="Delete">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- view Assigned department modal -->
+    <div id="View-AssignedDepartment" class="modal">
+        <div class="modal-content">
+            <div class="modalHeading">
+                <button class="btn" (click)="closeModal('View-AssignedDepartment')"><i
+                        class="fa fa-arrow-left"></i></button>
+                <h3 class="heading">Assigned Department Details</h3>
+                <span class="closeModal" (click)="closeModal('View-AssignedDepartment')">&times;</span>
+            </div>
+            <div class="addemp">
+
+                <div class="container mt-3">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>Employee Name</th>
+                                    <th>Department Assigned To Employee</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let Data of AssignDepartmentData">
+                                <tr>
+                                    <td>{{Data.empName}}</td>
+                                    <td>{{Data.detName}}</td>
+                                    <td>
+                                        <img id="editicon" (click)="editAssignedDepartment(Data.empName,Data)"
+                                            src="../../assets/edit.gif" alt="Edit" title="Edit">&nbsp;
+                                        <img id="deleteicon" (click)="deleteAssiDeptModal(Data._id)"
+                                            src="../../assets/trash-bin.gif" alt="delete" title="Delete">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="id01" class="modal">
+
+        <form class="modal-content animate" action="/action_page.php" method="post">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                    title="Close Modal">&times;</span>
+                <img src="" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <button type="submit">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- modals to update the existing data -->
+    <!-- Edit Assigned Department -->
+
+    <div id="editdept" class="w3-modal w3-animate-opacity">
+        <div class="w3-modal-content w3-animate-top w3-card-4">
+            <header class="w3-container w3-teal">
+                <span onclick="document.getElementById('editdept').style.display='none'"
+                    class="w3-button w3-display-topright">&times;</span>
+                <h2>Edit Assigned Department</h2>
+            </header>
+            <div class="w3-container">
+
+                <form #editForm="ngForm">
+                    <div class="form-group">
+                        <label for="field1">Employee Name</label>
+                        <input type="text" class="form-control" id="field1" disabled [(ngModel)]="empname" name="field1"
+                            #emp>
+                    </div>
+                    <div class="form-group">
+                        <label for="field2">Asssign Required Department by clicking below</label>
+                        <select name="deptName" id="deptName" formControlName="deptName" required class="form-control"
+                            #dept>
+                            <option value="" disabled>--Select Department--</option>
+                            <option *ngFor="let department of DepartmentData" value="{{department.deptname}}">
+                                {{department.deptname}}</option>
+                        </select>
+                    </div>
+                </form>
+
+                <footer class="w3-container">
+                    <p>&nbsp;
+                        <button type="submit" class="btn btn-success" (click)="editDept(dept.value)">Update
+                            Department</button>&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger"
+                            onclick="document.getElementById('editdept').style.display='none'">Cancle</button>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Employee Details Modal -->
+
+    <div id="editEmployee" class="w3-modal w3-animate-opacity">
+        <div class="w3-modal-content w3-animate-top w3-card-4">
+            <header class="w3-container w3-teal">
+                <span onclick="document.getElementById('editEmployee').style.display='none'"
+                    class="w3-button w3-display-topright">&times;</span>
+                <h2>Edit Employee Details</h2>
+            </header>
+            <div class="w3-container">
+                <!-- [formGroup]="EditEmpForm" -->
+                <form class="editform" id="categorySelectionForm">
+                    <label for="empName"><b>Employee Name</b></label>
+                    <input type="text" name="empName" class="content-wrapper form-control" [(ngModel)]="empName"
+                        placeholder="Edit Employee Name">
+
+                    <label for="empEmail"><b>Email</b></label>
+                    <input type="email" name="empEmail" for="email" placeholder="edit email"
+                        class="content-wrapper form-control" [(ngModel)]="empEmail">
+
+                    <label for="empDob"> <b>DOB</b></label>
+                    <input type="date" name="empDob" for="empDob" placeholder="Edit DOB"
+                        class="content-wrapper form-control" [(ngModel)]="empDob">
+
+                    <label for="empMobnum"><b>Mobile Number</b></label>
+                    <input type="number" name="empMobnum" for="empMobnum" placeholder="Edit Mobile Number"
+                        class="content-wrapper form-control" [(ngModel)]="empMobnum">
+
+                    <label for="empAddress"><b>Address</b></label>
+                    <input type="text" name="empAddress" for="empAddress" placeholder="Edit Address"
+                        class="content-wrapper form-control" [(ngModel)]="empAddress">
+
+                    <label for="empPincode"><b>Pincode</b></label>
+                    <input type="number" name="empPincode" for="empPincode" placeholder="Edit Pincode"
+                        class="content-wrapper form-control" [(ngModel)]="empPincode">
+                </form>
+
+                <footer class="w3-container">
+                    <p>&nbsp;
+                        <button type="submit" class="btn btn-success">Update Employee Data</button>&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger"
+                            onclick="document.getElementById('editEmployee').style.display='none'">Cancle</button>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Department Details Modal -->
+
+    <div id="editDepartment" class="w3-modal w3-animate-opacity">
+        <div class="w3-modal-content w3-animate-top w3-card-4">
+            <header class="w3-container w3-teal">
+                <span onclick="document.getElementById('editDepartment').style.display='none'"
+                    class="w3-button w3-display-topright">&times;</span>
+                <h2>Edit Department Details</h2>
+            </header>
+            <div class="w3-container">
+
+                <form class="editform" id="categorySelectionForm">
+                    <label for="deptName"><b>Department Name</b></label>
+                    <input type="text" name="deptName" class="content-wrapper form-control" [(ngModel)]="deptName"
+                        placeholder="Edit department Name">
+
+                    <label for="deptUnit"><b>Department Unit</b></label>
+                    <input type="text" name="deptUnit" for="deptUnit" placeholder="edit department unit"
+                        class="content-wrapper form-control" [(ngModel)]="deptUnit">
+
+                    <label for="deptCode"> <b>Department Code</b></label>
+                    <input type="number" name="deptCode" for="deptCode" placeholder="Edit department Code"
+                        class="content-wrapper form-control" [(ngModel)]="deptCode">
+
+                    <label for="deptLocation"><b>Department Location</b></label>
+                    <input type="text" name="deptLocation" for="deptLocation" placeholder="Edit Location"
+                        class="content-wrapper form-control" [(ngModel)]="deptLocation">
+
+                    <label for="deptContact"><b>Department Contact</b></label>
+                    <input type="number" name="deptContact" for="deptContact" placeholder="Edit department Contact"
+                        class="content-wrapper form-control" [(ngModel)]="deptContact">
+                </form>
+
+                <footer class="w3-container">
+                    <p>&nbsp;
+                        <button type="submit" class="btn btn-success">Update Department Data</button>&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger"
+                            onclick="document.getElementById('editDepartment').style.display='none'">Cancle</button>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- delete the row modals -->
+
+    <div class="modal-backdrop" [class.show]="isModalOpen"></div>
+
+    <!-- Delete Employee Modal -->
+    <div class="modal" id="deleteEmpModal" [class.show]="isModalOpen">
+        <div class="modal-content" id="delete-content">
+            <h3 class="text-danger">Delete this Employee ?</h3>
+            <p class="text-danger">This action will delete record forever.</p>
+            <div class="deleteButton">
+                <button class="btn btn-sm" id="deletebutton" (click)="deleteEmployee()">Confirm</button>
+                <button class="btn btn-sm" id="deletebutton" (click)="closedeleteEmpModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Department Modal -->
+    <div class="modal" id="deleteDepartment" [class.show]="isModalOpen">
+        <div class="modal-content" id="delete-content">
+            <h3 class="text-danger">Delete this Department ?</h3>
+            <p class="text-danger">This action will delete record forever.</p>
+            <div class="deleteButton">
+                <button class="btn btn-sm" id="deletebutton" (click)="deleteDept()">Confirm</button>
+                <button class="btn btn-sm" id="deletebutton" (click)="closedeletedeptModal()">Cancle</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete AssignedDept Modal -->
+    <div class="modal" id="deleteAssignedDeptModal" [class.show]="isModalOpen">
+        <div class="modal-content" id="delete-content">
+            <h3 class="text-danger">Delete this Assigned Department ?</h3>
+            <p class="text-danger">This action will delete record forever.</p>
+            <div class="deleteButton">
+                <button class="btn btn-sm" id="deletebutton" (click)="deleteAssiDept()">Confirm</button>
+                <button class="btn btn-sm" id="deletebutton" (click)="closedeleteAssideptModal()">Cancle</button>
+            </div>
+        </div>
+    </div>
+
+</body>

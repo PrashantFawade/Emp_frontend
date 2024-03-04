@@ -1,0 +1,899 @@
+.topnav {
+  /* background-color: #0099cc; */
+  /* background-color: rgb(102, 102, 255); */
+  /* background-color: 	#0080ff; */
+  background-color: #8f6bff;
+  /* background: linear-gradient(90deg, #03a9f4, #f441a5, #d146fc, #03a9f4); */
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 7px 10px;
+  text-decoration: none;
+  font-size:17px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+}
+
+.topnav #links{
+   color: black;
+   padding-top: 30px;
+}
+
+.topnav h4 {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#AppLogo{
+  width: 50px;
+  height: 40px;
+}
+
+.topnav i {
+  color: #f1f1f1;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  /* background-color: #ddd; */
+  color: white;
+  transform: scale(0.9);
+  text-shadow: 1px 1px 1px white;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+/* Create a right-aligned (split) link inside the navigation bar */
+.topnav a.split {
+  float: right;
+  padding-top: 15px;
+  /* color: white;
+  border: 1px solid rgb(91, 90, 90);
+  border-radius: 50%; */
+}
+
+.split img {
+  height: 40px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.topnav i {
+  font-size: 25px;
+}
+
+#nav-brand {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+
+/* The Modal Notification */
+
+.Notifymodal {
+  display: none;
+  z-index: 70000;
+  position: fixed;
+  top: 45px;
+  right: 45px;
+  width: 500px;
+  height: auto;
+  overflow: hidden;
+  animation-name: NotifyAnimation;
+  animation-duration: 0.7s;
+}
+
+/* Modal Content */
+.Notifymodal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 10px;
+  padding-bottom: 30px;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid #d5d1d1;
+  box-shadow: 0 4px 8px rgba(117, 116, 116, 0.667);
+}
+
+/* The Close Button */
+.closeNotifi {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.closeNotifi:hover,
+.closeNotifi:focus {
+  color: #8626c3;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.notifications {
+  overflow-y: auto;
+  max-height: 250px;
+  margin-left: 25px;
+}
+
+#notiImg{
+  width: 25px;
+  height: 25px;
+}
+
+#notiImg1{
+  width: 40px;
+  height: 40px;
+}
+
+#delete{
+  cursor: pointer;
+  color: rgb(240, 95, 95);
+  width: 20px;
+  height: 20px;
+}
+
+.Notifymodal button {
+  float: right;
+  background-color:#f4511e;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.notification-badge {
+  padding: 4px 7px ;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 15px;
+}
+
+@keyframes NotifyAnimation {
+  from {
+    top: 20px;
+    opacity: 0
+  }
+
+  to {
+    top: 50px;
+    opacity: 1
+  }
+}
+
+
+/* /////////////////////////////////////////// */
+
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  top: 74px;
+  margin: 0;
+  padding: 0;
+  width: 220px;
+  background-color: #abddf7;
+  border-radius: 0px 10px 10px 0px;
+  position: fixed;
+  height: 87%;
+  overflow: auto;
+  box-shadow: 1px 2px 4px #7a7979 inset, 1px 2px 4px #7a7979;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 1px solid rgb(180, 175, 175);
+}
+
+.sidebar h4 {
+  padding: 10px;
+  background-color: #66a3ff;
+}
+
+/* .sidebar a.active {
+  background-color: #04AA6D;
+  color: white;
+} */
+
+.sidebar a:hover:not(.active) {
+  background-color: #66a3ff;
+  box-shadow: 1px 2px 4px #77f4bc inset, 1px 2px 4px #92faca;
+  border-radius: 5px;
+  padding-left: 40px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .sidebar a {
+    float: left;
+  }
+
+  div.content {
+    margin-left: 0;
+    overflow: auto;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+.menubtn{
+  transition: all 0.5s;
+}
+
+.menubtn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+/* .content{
+  padding: 10px;
+  border: 1px solid red;
+  margin-left: 235px;
+  margin-right: 10px;
+  height: 90%;
+  width:80%;
+  box-shadow: 1px 2px 4px #c4c2c2;
+} */
+
+div.content {
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-left: 235px;
+  margin-right: 10px;
+  padding: 10px;
+  /* height: 475px; */
+  height: auto;
+  box-shadow: 3px 3px 3px 4px #c4c2c2;
+}
+
+.content {
+  background-image: url('../../assets/background-img.png');
+  opacity: 1;
+  border-image: fill 0 linear-gradient(rgba(0, 0, 0, 0.067), #000000);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100px 300px;
+  background-size: cover;
+  padding: 50px;
+  color: rgb(0, 0, 0);
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.content h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.content h1 p {
+  font-size: 0.5em;
+  margin-bottom: 40px;
+  margin-top: 5px;
+  font-weight: 400;
+}
+
+
+.content button {
+  font-size: 1em;
+  padding: 10px 20px;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 25px 0px 25px 0px;
+  cursor: pointer;
+  box-shadow: 2px 4px 8px 3px black;
+}
+
+.content button:hover {
+  box-shadow: 2px 4px 8px 3px #66a3ff;
+  font-weight: bold;
+}
+
+.button {
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  width: 220px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  font-size: 15px;
+  font-weight: bold;
+  color: #0e11a2;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.content button img {
+  width: 80px;
+  height: 80px;
+  opacity: 1;
+}
+
+.h1{
+  color: #72ecb3;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: lighter;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#img{
+  font-weight: bolder;
+  width: 50px;
+  height: 50px;
+}
+
+.gradient-text {
+  font-size: 1.2rem;
+  font-weight:700;
+  color: #FFFFFF;
+  background: url(../../assets/delete.png) no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* ////////////////////// */
+
+h1 span[class="Bt"]{
+  color: #000000;
+  font-weight: bold;
+  font-size: medium;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.Bt {
+  text-decoration: none;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  width: 100px;
+  height: 3em;
+  text-align: center;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 300%;
+  border-radius: 10px;
+  padding: 5px;
+  margin-left: 7px;
+  z-index: 100000;
+}
+
+.Bt:hover {
+  animation: ani 8s linear infinite;
+  border: none;
+}
+
+@keyframes ani {
+  0% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 400%;
+  }
+}
+
+.Bt:before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 300%;
+  border-radius: 30px;
+  transition: 1s;
+}
+
+.Bt:hover::before {
+  filter: blur(10px);
+}
+
+.Bt:active {
+  background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+}
+
+
+/* ///////////////////////////////////////////////////// */
+
+.modal {
+  left: 235px;
+  top: 74px;
+  right: 100px;
+  border-radius: 10px;
+  height: 87%;
+  width: 81%;
+  box-shadow: 1px 2px 4px #c4c2c2;
+  overflow: auto;
+}
+
+/* .modal-content {
+  background-color: #fefefe;
+  margin: 5px 5px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 90%;
+  height: auto;
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.6s;
+} */
+
+@media screen and (max-width: 600px) {
+  .modal-content {
+    width: 100%;
+  }
+}
+
+#star {
+  color: red;
+}
+
+.closeModal {
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.closeModal:hover,
+.closeModal:focus {
+  color: #29a329;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.table td{
+  font-size: medium;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#editicon{
+  height: 30px;
+  width: 30px;
+  font-weight: bold;
+}
+
+#editicon:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: all 0.2s ease;
+}
+
+#deleteicon{
+  height: 40px;
+  width: 30px;
+  font-weight: bold;
+}
+
+#deleteicon:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: all 0.2s ease;
+}
+
+/* /// Loader Styling /// */
+
+.loader {
+  border: 12px solid #f3f3f3;
+  border-top: 12px solid #8626c3;
+  border-bottom: 12px solid #8626c3;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin-top: 200px;
+  margin-left: 650px;
+  animation: spin 2s linear infinite;
+
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  margin-top: 30px;
+  margin-left: 70px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #474bff 94%, #0000) top/9px 9px no-repeat,
+    conic-gradient(#0000 30%, #474bff);
+  mask-image: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
+  animation: spinner 1s infinite linear;
+}
+
+@keyframes spinner {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.Waiter {
+  width: 250px;
+  height: 200px;
+  margin-top: 200px;
+  margin-left: 600px;
+  box-shadow: 4px 4px 8px;
+  background-color: #cff1e2;
+}
+
+.Waiter p {
+  background-color: #f4511e;
+  padding: 10px;
+  font-size: large;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+/* table CSS */
+.table-responsive {
+  display: block;
+  width: 100%;
+  height: 400px; 
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+thead {
+  position: sticky;
+  top: 0;
+  background: red;
+}
+
+.table-success {
+  position: sticky;
+  z-index: 1;
+  border-radius: 10px;
+}
+
+tbody tr td{
+  font-size: 1rem;
+}
+
+/* Add Employee styling */
+
+.modalHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgb(125, 123, 123);
+}
+
+.heading {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
+  color: #8626c3;
+  text-align: center;
+  flex-grow: 1;
+  font-size: 20px;
+  padding-top: 5px;
+}
+
+
+.addemp {
+  display: flex;
+  box-shadow: 1px 2px 4px #b1b1af inset, 1px 2px 4px #bbbbb8;
+  border-radius: 10px;
+  padding: 10px;
+  height: 400px;
+  margin: 10px;
+  overflow-y: auto;
+}
+
+.addemp .column {
+  flex: 50%;
+  padding: 10px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: small;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0.5rem 1rem;
+}
+
+
+/* Profile modal styling */
+/* //////////////////////////////////////////////////// */
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+/* .container {
+  padding: 16px;
+} */
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+/* .modal {
+  display: none;
+  position: fixed;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+  padding-top: 60px;
+} */
+
+/* Modal Content/Box */
+/* .modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; 
+  border: 1px solid #888;
+  width: 80%; 
+} */
+
+/* The Close Button (x) */
+/* .close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+} */
+
+/* .close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+} */
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0)
+  }
+
+  to {
+    -webkit-transform: scale(1)
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0)
+  }
+
+  to {
+    transform: scale(1)
+  }
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+
+  .cancelbtn {
+    width: 100%;
+  }
+}
+
+/* delete user modal styling */
+
+.modal-content[id="delete-content"] {
+  padding: 15px;
+  margin: 15px auto;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 30%;
+  height: 40%;
+  top: 150px;
+  font-weight: bold;
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animateDeleteUser;
+  animation-duration: 0.6s;
+}
+
+.deleteButton {
+  display: flex;
+  justify-content: space-around;
+}
+
+#deletebutton {
+  background-color: #8d00e5;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+@keyframes animateDeleteUser {
+  from {
+    top: 50px;
+    opacity: 0
+  }
+
+  to {
+    top: 150px;
+    opacity: 1
+  }
+}
+
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  display: none;
+}
+
+.modal-backdrop.show {
+  display: block;
+}
+
+.modal {
+  position: fixed;
+}
+
+/* ////////////////////////////////////////// */
+
+/* Edit department modal */
+
+#editdept{
+  z-index: 2000;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+.w3-container{
+  padding: 10px;
+}
+
+footer{
+  float: right;
+}
+
+/* Edit Employee Modal */
+
+#editEmployee{
+  z-index: 30000;
+}
+
+/* Edit Department Modal */
+
+#editDepartment{
+  z-index: 4000;
+}

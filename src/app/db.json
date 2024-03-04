@@ -1,0 +1,28 @@
+{
+    "EmpData": [
+        {
+            "name": "James",
+            "age": 61,
+            "dept": "legal",
+            "city": "mumbai"
+        },
+        {
+            "name": "John",
+            "age": 62,
+            "dept": "ETA",
+            "city": "Pune"
+        },
+        {
+            "name": "Smith",
+            "age": 63,
+            "dept": "CSE",
+            "city": "Delhi"
+        },
+        {
+            "name": "Jacob",
+            "age": 64,
+            "dept": "NCS",
+            "city": "Agra"
+        }
+    ]
+}
